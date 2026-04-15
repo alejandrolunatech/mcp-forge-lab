@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* Class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── XP Toast animation ───────────────────────────────────────────────────── */
+@keyframes xp-toast {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.93); }
+  12%  { opacity: 1; transform: translateY(0)    scale(1);    }
+  72%  { opacity: 1; transform: translateY(0)    scale(1);    }
+  100% { opacity: 0; transform: translateY(-10px) scale(0.97); }
+}
+
+.xp-toast {
+  animation: xp-toast 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Boss Fight animations ────────────────────────────────────────────────── */
+@keyframes boss-timer-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+.boss-timer-pulse {
+  animation: boss-timer-pulse 0.85s ease-in-out infinite;
+}
+
+@keyframes boss-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-7px); }
+  40%      { transform: translateX(7px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+.boss-shake {
+  animation: boss-shake 0.46s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Base dark theme defaults */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100 antialiased;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-700 hover:bg-gray-600;
+  }
+}
